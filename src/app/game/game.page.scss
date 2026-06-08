@@ -9,7 +9,6 @@ ion-content {
   color: #fff;
 }
 
-/* Info bar */
 #game-info {
   display: flex;
   justify-content: space-around;
@@ -38,7 +37,6 @@ ion-content {
   color: #663300;
 }
 
-/* Board container */
 #board-container {
   display: flex;
   justify-content: center;
@@ -62,7 +60,6 @@ ion-content {
   border-radius: 10px;
 }
 
-/* Canvas untuk garis penghubung */
 #lineCanvas {
   position: absolute;
   top: 0;
@@ -73,7 +70,6 @@ ion-content {
   pointer-events: none;
 }
 
-/* Tile */
 .tile {
   width: 100%;
   aspect-ratio: 1 / 1; 
@@ -97,7 +93,6 @@ ion-content {
   transform: scale(0.95);
 }
 
-/* Efek pecah tile */
 .tile.hidden {
   animation: explode 0.5s forwards;
 }
@@ -109,7 +104,6 @@ ion-content {
   100% { transform: scale(0); opacity: 0; }
 }
 
-/* Tile themes */
 .tile.Klasik {
   background: #fff;
   border: 2px solid #ccc;
@@ -133,7 +127,6 @@ ion-content {
   color: #333;
 }
 
-/* Controls */
 #controls {
   display: flex;
   justify-content: center;

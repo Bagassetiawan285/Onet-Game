@@ -21,21 +21,24 @@ export class RiwayatscorePage implements OnInit {
     private audioService: AudioService
   ) {}
 
-  ngOnInit() {
-    this.dailyScores = this.getWeeklyScores();
-    this.totalWeeklyScore = this.dailyScores.reduce((sum, s) => sum + s.score, 0);
-  }
+ngOnInit() {
+  this.checkDailyReset();
+  this.dailyScores = JSON.parse(localStorage.getItem('dailyScores') || '[]');
+  this.totalWeeklyScore = this.dailyScores.reduce((sum, s) => sum + s.score, 0);
+}
 
-  ionViewDidEnter() {
-    const currentLevel = localStorage.getItem('currentLevel')
-      ? parseInt(localStorage.getItem('currentLevel')!, 10)
-      : 1;
-    this.audioService.playLevelMusic(currentLevel);
+ionViewDidEnter() {
+  this.checkDailyReset();
+  const currentLevel = localStorage.getItem('currentLevel')
+    ? parseInt(localStorage.getItem('currentLevel')!, 10)
+    : 1;
+  this.audioService.playLevelMusic(currentLevel);
 
-    this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(10, () => {
-      this.navCtrl.navigateRoot('/menu');
-    });
-  }
+  this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(10, () => {
+    this.navCtrl.navigateRoot('/menu');
+  });
+}
+
 
   ionViewWillLeave() {
     if (this.backButtonSubscription) {
@@ -65,4 +68,24 @@ export class RiwayatscorePage implements OnInit {
       : 1;
     this.audioService.playLevelMusic(currentLevel);
   }
+
+  checkDailyReset() {
+  const now = new Date();
+  const resetHour = 0;  
+  const resetMinute = 15; 
+
+  const resetTime = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    resetHour,
+    resetMinute,
+    0
+  );
+
+  if (now.getTime() >= resetTime.getTime()) {
+    localStorage.removeItem('dailyScores');
+  }
+}
+
 }

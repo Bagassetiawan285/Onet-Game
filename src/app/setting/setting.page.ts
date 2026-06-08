@@ -39,7 +39,6 @@ export class SettingPage implements OnInit {
       }
     }
 
-    // Sinkronisasi dengan AudioService
     this.audioService.setMusicEnabled(this.settings.music);
     this.audioService.setSfxEnabled(this.settings.sfx);
   }
@@ -50,7 +49,6 @@ export class SettingPage implements OnInit {
     this.audioService.setMusicEnabled(this.settings.music);
     this.audioService.setSfxEnabled(this.settings.sfx);
 
-    // Kalau musik dimatikan, stop semua musik (bg/success/victory)
     if (!this.audioService.getMusicEnabled()) {
       this.audioService.stopMusic();
     }
@@ -74,7 +72,6 @@ export class SettingPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    // Back button HP → kembali ke menu
     this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(10, () => {
       this.navCtrl.navigateRoot('/menu'); 
     });
@@ -85,6 +82,5 @@ export class SettingPage implements OnInit {
       this.backButtonSubscription.unsubscribe();
       this.backButtonSubscription = null;
     }
-    // Jangan stop musik di sini, biarkan tetap jalan sesuai flag
   }
 }
