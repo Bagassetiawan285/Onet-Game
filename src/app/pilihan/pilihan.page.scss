@@ -1,0 +1,65 @@
+ion-content {
+  --background: none;
+  background: url('/assets/icon/gambarbuah.png') no-repeat center center / cover;
+
+  &::part(scroll) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+  }
+}
+
+.overlay-box {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(
+    135deg,
+    rgba(59, 196, 14, 0.706), 
+    rgba(28, 126, 57, 0.7)   
+  );
+  border: 4px solid gold;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+  z-index: 9999;
+}
+
+.overlay-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(232, 248, 52);
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6); 
+}
+
+.overlay-subtitle {
+  font-size: 1.2rem;
+  color: #ffe082;
+  margin-bottom: 20px;
+}
+
+.overlay-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.btn-purple {
+  background: linear-gradient(135deg, rgba(31,162,40,0.9), rgba(39,176,66,0.9));
+  border: 3px solid gold;
+  color: gold;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 14px 34px;
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(255,215,0,0.7);
+  transition: transform 0.2s ease;
+}
+
+.btn-purple:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(255,215,0,1);
+}

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title> Catatan Skor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Total Skor Mingguan</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>{{ totalWeeklyScore }}</h2>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="score-board">
+    <table>
+      <thead>
+        <tr>
+          <th>Hari</th>
+          <th>Tanggal</th>
+          <th>Jam</th>
+          <th>Skor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dailyScores">
+          <td>{{ item.day }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.time }}</td>
+          <td>{{ item.score }} {{ item.icon }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>

@@ -1,0 +1,15 @@
+<ion-content>
+  <div class="back-button">
+    <ion-button expand="block" (click)="goBack()">⬅️ Kembali ke Menu</ion-button>
+  </div>
+
+  <div class="level-grid">
+    <div *ngFor="let lvl of levels" 
+         class="level-box" 
+         [class.locked]="lvl > maxLevelUnlocked"
+         (click)="selectLevel(lvl)">
+      <span>{{ lvl }}</span>
+      <ion-icon *ngIf="lvl > maxLevelUnlocked" name="lock-closed"></ion-icon>
+    </div>
+  </div>
+</ion-content>

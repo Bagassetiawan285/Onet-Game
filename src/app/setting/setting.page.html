@@ -1,0 +1,44 @@
+<ion-content class="ion-content">
+  <div class="settings-container">
+    
+    <div class="settings-header">
+      <h1>PENGATURAN</h1>
+    </div>
+
+    <div class="settings-card">
+      <ion-list lines="none">
+        
+        <ion-item class="setting-item">
+          <ion-icon name="musical-notes-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>Musik</ion-label>
+          <ion-toggle slot="end" [(ngModel)]="settings.music" (ionChange)="updateSettings()"></ion-toggle>
+        </ion-item>
+
+        <ion-item class="setting-item">
+          <ion-icon name="volume-high-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>Efek Suara</ion-label>
+          <ion-toggle slot="end" [(ngModel)]="settings.sfx" (ionChange)="updateSettings()"></ion-toggle>
+        </ion-item>
+
+        <div class="divider-space"></div>
+
+        <ion-item class="setting-item" button (click)="changeTheme()">
+          <ion-icon name="color-palette-outline" slot="start" color="success"></ion-icon>
+          <ion-label>Ganti Tema Tile</ion-label>
+          <ion-note slot="end" color="dark">{{ settings.theme }}</ion-note>
+        </ion-item>
+
+      </ion-list>
+    </div>
+
+    <div class="settings-footer">
+      <ion-button expand="block" shape="round" color="primary" class="main-btn" (click)="saveAndExit()">
+        SIMPAN PERUBAHAN
+      </ion-button>
+      <ion-button expand="block" fill="outline" shape="round" color="medium" (click)="goBack()">
+        KEMBALI
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

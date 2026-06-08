@@ -1,0 +1,123 @@
+ion-content {
+  --background: none;
+  background: url('/assets/icon/gambarbuah.png') no-repeat center center / cover;
+
+  &::part(scroll) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+  }
+}
+
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+
+
+
+#container {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 5px orange;
+  margin-bottom: 40px;
+}
+
+.title span {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+.pink { background-color: #ff69b4; }
+.orange { background-color: #ffa500; }
+.green { background-color: #32cd32; }
+.blue { background-color: #1e90ff; }
+.yellow { background-color: #ffd700; }
+
+.menu-buttons ion-button {
+  position: relative;
+  border: 3px solid rgba(165, 42, 42, 0.6); 
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.3); 
+  color: #000; 
+  backdrop-filter: blur(4px); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
+
+.btn {
+  width: 200px;
+  padding: 15px;
+  border-radius: 10px;
+  border: 3px solid #ffd700;
+  background-color: #8b4513;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 0 10px #ffd700;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.play ion-icon { color: #ffd700; }
+.sound ion-icon { color: #1e90ff; }
+.settings ion-icon { color: #ff7f50; }
+
+.menu-icons {
+  margin-top: 40px;
+}
+
+.icon {
+  font-size: 40px;
+  margin: 0 10px;
+  color: #ffd700;
+  filter: drop-shadow(0 0 5px #fff);
+}
+
+
+
+
+
+
+
+
+
+
+

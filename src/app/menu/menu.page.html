@@ -1,0 +1,36 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+
+    <h1 class="title">
+      <span class="pink">G</span>
+      <span class="orange">A</span>
+      <span class="green">M</span>
+      <span class="blue">E</span>
+      <span class="yellow">ONET</span>
+    </h1>
+
+    <div class="menu-buttons">
+      <ion-button class="btn play" (click)="goToGame()">
+        <ion-icon name="play"></ion-icon> PLAY
+      </ion-button>
+      <ion-button class="btn setting" (click)="goToSetting()">
+        <ion-icon name="settings"></ion-icon> SETTINGS
+      </ion-button>
+      <ion-button class="btn history" (click)="goToHistory()">
+        <ion-icon name="list"></ion-icon> SCORE 
+      </ion-button>
+      <ion-button class="btn levels" (click)="goToPilihLevel()">
+        <ion-icon name="grid"></ion-icon> LEVEL
+      </ion-button>
+    </div>
+
+
+    <div class="menu-icons">
+      <ion-icon name="medal" class="icon medal"></ion-icon>
+      <ion-icon name="trophy" class="icon trophy"></ion-icon>
+      <ion-icon name="star" class="icon star"></ion-icon>
+    </div>
+  </div>
+
+  
+</ion-content>

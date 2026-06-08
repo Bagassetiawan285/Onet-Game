@@ -1,0 +1,61 @@
+ion-content {
+  --background: none;
+  background: url('/assets/icon/gambarbuah.png') no-repeat center center / cover;
+
+  &::part(scroll) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+  }
+}
+
+
+
+.settings-container {
+  width: 90%;
+  max-width: 450px; 
+  background-color: rgba(38, 37, 37, 0.5762);
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(147, 145, 145, 0.08);
+}
+
+.settings-header {
+  text-align: center;
+  margin-bottom: 25px;
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: rgb(209, 209, 209);
+    margin: 0;
+  }
+}
+
+.settings-card {
+  ion-list { background: transparent; padding: 0; }
+  
+  .setting-item {
+    --background: #363535;
+    --padding-start: 15px;
+    --border-radius: 12px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .divider-space { height: 15px; }
+}
+
+.settings-footer {
+  margin-top: 30px;
+  display: flex;
+  .main-btn {
+    height: 50px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  ion-button {
+  color: #000 !important; 
+  --color: #000;          
+}
+}

@@ -1,0 +1,85 @@
+ion-header {
+  --background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff6a88);
+  --color: #fff;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+ion-content {
+   --background: none;
+  background: url('/assets/icon/gambarbuah.png') no-repeat center center / cover;
+  padding: 16px;
+  animation: slideIn 0.5s ease;
+}
+
+.score-board {
+  margin: 20px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 100, 150, 0.6);
+  overflow-x: auto;
+  animation: fadeIn 0.6s ease;
+
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #fff,
+    #fff 38px,
+    #f2f2f2 38px,
+    #f2f2f2 40px
+  );
+
+  position: relative;
+}
+
+.score-board::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 60px;
+  width: 2px;
+  height: 100%;
+  background: rgba(0, 120, 255, 0.6);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: transparent; 
+}
+
+thead {
+  background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff6a88);
+  color: #fff;
+}
+
+th, td {
+  padding: 14px;
+  border: none; 
+  background: transparent; 
+}
+
+td {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+td.high-score {
+  color: #fff;
+  background: linear-gradient(135deg, #ff4d6d, #ff758c);
+  text-shadow: 0 0 8px rgba(255,255,255,0.9);
+  box-shadow: 0 0 12px rgba(255, 0, 100, 0.8);
+  border-radius: 8px;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

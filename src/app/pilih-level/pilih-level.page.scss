@@ -1,0 +1,74 @@
+ion-content {
+   --background: none;
+  background: url('/assets/icon/gambarbuah.png') no-repeat center center / cover;
+  padding: 16px;
+  animation: slideIn 0.5s ease;
+}
+
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 12px;
+  margin: 20px;
+}
+
+.level-box {
+  background: rgb(165, 163, 163);
+  border-radius: 10px;
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(113, 113, 113, 0.25);
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.level-box span {
+  display: block;
+  font-size: 18px;
+  color: #fff;
+}
+
+.level-box ion-icon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 18px;
+  color: #000;
+}
+
+.level-box:hover {
+  transform: scale(1.05);
+}
+
+.level-box.locked {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.back-button {
+  margin: 20px auto;  
+  width: 80%;         
+  text-align: center;  
+  display: flex;
+  justify-content: center;
+}
+
+.back-button ion-button {
+  --background: #007bff;      
+  --color: #fff;               
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.back-button ion-button:hover {
+  --background: #3399ff;      
+  box-shadow: 0 0 12px #3399ff; 
+  transform: scale(1.05);       
+}
+
+

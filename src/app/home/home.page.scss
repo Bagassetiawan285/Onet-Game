@@ -1,3 +1,9 @@
+ion-content {
+  --background: linear-gradient(to bottom, #732408, #8e9ba8);
+}
+
+
+
 #container {
   text-align: center;
 
@@ -17,7 +23,7 @@
   font-size: 16px;
   line-height: 22px;
 
-  color: #8c8c8c;
+  color: #5f5e5e;
 
   margin: 0;
 }
@@ -25,3 +31,117 @@
 #container a {
   text-decoration: none;
 }
+
+
+#container a:hover {
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#container {
+  background: #8b5a2b;
+  border: 10px solid gold;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+  position: relative;
+}
+
+#container h1 {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+}
+
+#container h1 span {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.pink {
+  background: #ff69b4;
+}
+
+.orange {
+  background: #ffa500;
+}
+
+.green {
+  background: #32cd32;
+}
+
+.blue {
+  background: #1e90ff;
+}
+
+.yellow {
+  background: #ffd700;
+}
+
+
+#container {
+  position: absolute;
+  font-size: 1px;
+}
+
+#container.green {
+  color: #32cd32;
+  top: 10px;
+  left: 10px;
+}
+
+#container.yellow {
+  color: #ffd700;
+  bottom: 5px;
+  right: 10px;
+}
+
+#container.purple {
+  color: #800080;
+  top: 50%;
+  right: -15px;
+}
+
+
+.progress-container {
+  width: 300px;
+  height: 30px;
+  background-color: #8B4513;
+  border: 3px solid orange;
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 20px auto;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: lightblue;
+  border-radius: 50px;
+  animation: loading 3s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    width: 0%;
+  }
+
+  50% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
+
+
