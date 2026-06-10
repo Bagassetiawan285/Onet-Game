@@ -127,21 +127,14 @@ ion-content {
   height: 100%;
   background-color: lightblue;
   border-radius: 50px;
-  animation: loading 3s linear infinite;
+  animation: loading 2s linear forwards; 
 }
 
 @keyframes loading {
   0% {
     width: 0%;
   }
-
-  50% {
+  100% {
     width: 100%;
   }
-
-  100% {
-    width: 0%;
-  }
 }
-
-

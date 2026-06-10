@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pilihan',
@@ -13,7 +13,10 @@ export class PilihanPage implements OnInit {
   level: number = 1; 
   levelCompleted: boolean = false; 
 
-  constructor(private navCtrl: NavController) {}
+  constructor(
+    private navCtrl: NavController,
+    private toastController: ToastController
+  ) {}
 
   ngOnInit() {
     const currentLevel = localStorage.getItem('currentLevel');
@@ -57,5 +60,21 @@ export class PilihanPage implements OnInit {
 
   closeOverlay() {
     this.levelTransitionVisible = false;
+  }
+
+  async resetProgress() {
+    localStorage.removeItem('currentLevel');
+    localStorage.removeItem('currentScore');
+    localStorage.removeItem('levelCompleted');
+    localStorage.removeItem('allLevelsUnlocked');
+    localStorage.removeItem('dailyScores');
+
+    const toast = await this.toastController.create({
+      message: '✅ Progress berhasil direset, kamu dianggap user baru!',
+      duration: 2000,
+      color: 'success',
+      position: 'middle'
+    });
+    toast.present();
   }
 }

@@ -10,25 +10,21 @@ export class AudioService {
   private activeSfx: HTMLAudioElement[] = []; 
 
   constructor() {
+    // baca setting dari localStorage
     const music = localStorage.getItem('musicEnabled');
     const sfx = localStorage.getItem('sfxEnabled');
     if (music !== null) this.musicEnabled = music === 'true';
     if (sfx !== null) this.sfxEnabled = sfx === 'true';
 
-    if (this.musicEnabled) {
-      this.playMusic(); 
-    }
+    // ❌ jangan auto play musik di sini
+    // musik hanya dipanggil dari Menu/Game
   }
 
-  
+  // === MUSIC CONTROL ===
   setMusicEnabled(enabled: boolean) {
     this.musicEnabled = enabled;
     localStorage.setItem('musicEnabled', String(enabled));
-    if (enabled) {
-      if (!this.isMusicPlaying()) {
-        this.playMusic();
-      }
-    } else {
+    if (!enabled) {
       this.stopMusic();
     }
   }
@@ -44,7 +40,7 @@ export class AudioService {
   playMusic(path: string = 'assets/sounds/bg-music.mp3') {
     if (this.musicEnabled) {
       if (this.isMusicPlaying() && this.currentMusic?.src.includes(path)) {
-        return;
+        return; // sudah main musik yang sama
       }
       this.stopMusic(); 
       this.currentMusic = new Audio(path);
@@ -62,7 +58,7 @@ export class AudioService {
     }
   }
 
-  playVictoryMusic(path: string = 'assets/sounds/succes.mp3', loop: boolean = false) {
+  playVictoryMusic(path: string = 'assets/sounds/victory.mp3', loop: boolean = false) {
     if (this.musicEnabled) {
       this.stopMusic();
       this.currentMusic = new Audio(path);
@@ -113,7 +109,6 @@ export class AudioService {
   }
 
   stopAllSfx() {
-    this.sfxEnabled = false;
     this.activeSfx.forEach(sfx => {
       sfx.pause();
       sfx.currentTime = 0;

@@ -1,4 +1,3 @@
-
 <ion-content [fullscreen]="true">
   <div *ngIf="levelTransitionVisible" class="overlay-box">
     <h2 class="overlay-title">ONET GAME</h2>
@@ -7,6 +6,9 @@
       <button class="btn-purple" (click)="continueGame()">LANJUT</button>
       <button class="btn-purple" (click)="replayGame()">ULANG</button>
       <button class="btn-purple" (click)="goToMenu()">MENU</button>
+      <ion-button expand="block" color="danger" (click)="resetProgress()">
+        🔄 Reset Progress
+      </ion-button>
     </div>
   </div>
 </ion-content>

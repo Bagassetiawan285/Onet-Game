@@ -274,54 +274,56 @@ ion-content {
   position: fixed;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  background: linear-gradient(
-    135deg,
-    rgba(59, 196, 14, 0.706), 
-    rgba(28, 126, 57, 0.7)   
-  );
-  border: 4px solid gold;
+  background: rgba(0, 51, 102, 0.85); 
+  border: 4px solid #003366;
   border-radius: 20px;
   padding: 30px;
   text-align: center;
-  box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
   z-index: 9999;
 }
 
 .overlay-title {
   font-size: 2rem;
   font-weight: bold;
-  color: rgb(232, 248, 52);
+  color: #ffffff;
   margin-bottom: 10px;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.6); 
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 }
 
 .overlay-subtitle {
   font-size: 1.2rem;
-  color: #ffe082;
+  color: #cce6ff;
   margin-bottom: 20px;
 }
 
 .overlay-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  justify-content: center;
+  gap: 20px; 
 }
 
 .btn-purple {
-  background: linear-gradient(135deg, rgba(31,162,40,0.9), rgba(39,176,66,0.9));
-  border: 3px solid gold;
-  color: gold;
-  font-size: 1.3rem;
+  background: linear-gradient(180deg, #4da6ff, #0059b3); 
+  border: 3px solid #003d80;
+  color: #fff;
+  font-size: 1.2rem;
   font-weight: bold;
   padding: 14px 34px;
-  border-radius: 14px;
-  box-shadow: 0 0 25px rgba(255,215,0,0.7);
-  transition: transform 0.2s ease;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-purple:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 35px rgba(255,215,0,1);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.6);
 }
+
 
 

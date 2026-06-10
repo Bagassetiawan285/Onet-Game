@@ -7,26 +7,28 @@
     </ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="goToMenu()">
-  <ion-icon name="arrow-back-outline"></ion-icon>
-  Kembali
-</ion-button>
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        Kembali
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <!-- Info Game -->
   <div id="game-info">
     <div class="info-box level">
-      <ion-label>Level: {{level}}</ion-label>
+      <ion-label>Level: {{ level }}</ion-label>
     </div>
     <div class="info-box score">
-      <ion-label>Score: {{score}}</ion-label>
+      <ion-label>Score: {{ score }}</ion-label>
     </div>
     <div class="info-box time">
-      <ion-label>Waktu: {{time}} detik</ion-label>
+      <ion-label>Waktu: {{ time }} detik</ion-label>
     </div>
   </div>
 
+  <!-- Board -->
   <div id="board-container">
     <div id="board">
       <canvas id="lineCanvas"></canvas>
@@ -35,63 +37,62 @@
            [style.zIndex]="tile.z" [class.hidden]="tile.hidden"
            [ngClass]="currentTheme"
            (click)="audioService.playSfx('assets/sounds/click.mp3'); selectTile(tile)">
-        <ion-img [src]="tile.image"></ion-img>
-        {{tile.icon}}
+        {{ tile.icon }}
       </div>
     </div>
   </div>
 
+  <!-- Controls -->
   <div id="controls">
     <button (click)="audioService.playSfx('assets/sounds/click.mp3'); resetGame()">RESET</button>
-    <button (click)="audioService.playSfx('assets/sounds/click.mp3'); useHint()">HINT ({{hint}})</button>
-    <button (click)="audioService.playSfx('assets/sounds/click.mp3'); shuffleBoard()">SHUFFLE ({{shuffle}})</button>
-    <button (click)="audioService.playSfx('assets/sounds/click.mp3'); undoMove()">UNDO ({{undo}})</button>
+    <button (click)="audioService.playSfx('assets/sounds/click.mp3'); useHint()">HINT ({{ hint }})</button>
+    <button (click)="audioService.playSfx('assets/sounds/click.mp3'); shuffleBoard()">SHUFFLE ({{ shuffle }})</button>
+    <button (click)="audioService.playSfx('assets/sounds/click.mp3'); undoMove()">UNDO ({{ undo }})</button>
   </div>
 
+  <!-- Overlay Waktu Habis -->
   <div *ngIf="timeOverVisible" class="overlay-box">
-  <h2 class="overlay-title">Waktu Habis ⏰</h2>
-  <p>Mau coba lagi?</p>
-  <div class="overlay-buttons">
-    <button class="btn-purple" (click)="retryLevel()">COBA LAGI</button>
-    <button class="btn-purple" (click)="exitToMenu()">MENU</button>
-  </div>
-</div>
-
-
-<div *ngIf="levelTransitionVisible" class="overlay-box">
-  <h2 class="overlay-title"> LevelKe {{ level + 1 }}?</h2>
-  <p>Pilih aksi sebelum lanjut.</p>
-
-  <div class="overlay-buttons">
-    <button class="btn-purple" (click)="continueGame()">LANJUT</button>
-    <button class="btn-purple" (click)="replayGame()">ULANG</button>
-    <button class="btn-purple" (click)="goToMenu()">MENU</button>
-  </div>
-</div>
-
- <div *ngIf="finalResultVisible" class="victory-screen">
-  <div class="victory-banner">
-    <img src="assets/images/crown.png" alt="Crown" class="crown" />
-    <h1 class="victory-title">VICTORY</h1>
-    <p class="victory-subtitle">YOU WIN!</p>
+    <h2 class="overlay-title">Waktu Habis ⏰</h2>
+    <p>Mau coba lagi?</p>
+    <div class="overlay-buttons">
+      <button class="btn-purple" (click)="retryLevel()">COBA LAGI</button>
+      <button class="btn-purple" (click)="exitToMenu()">MENU</button>
+    </div>
   </div>
 
-  <div class="fruit-row">
-    <span class="fruit">🍎</span>
-    <span class="fruit">🍍</span>
-    <span class="fruit">🍇</span>
-    <span class="fruit">🍓</span>
-    <span class="fruit">🍉</span>
+  <div *ngIf="levelTransitionVisible" class="overlay-box">
+    <h2 class="overlay-title">Level ke {{ level + 1 }}</h2>
+    <p>BERHASIL</p>
+    <div class="overlay-buttons">
+      <button class="btn-purple" (click)="continueGame()">LANJUT</button>
+      <button class="btn-purple" (click)="replayGame()">ULANG</button>
+      <button class="btn-purple" (click)="goToMenu()">MENU</button>
+    </div>
   </div>
 
-  <div class="victory-score">Skor Akhir: {{ finalScore }}</div>
+  <div *ngIf="finalResultVisible" class="victory-screen">
+    <div class="victory-banner">
+      <img src="assets/images/crown.png" alt="Crown" class="crown" />
+      <h1 class="victory-title">VICTORY</h1>
+      <p class="victory-subtitle">YOU WIN!</p>
+    </div>
 
-  <div class="victory-buttons">
-    <button class="btn-purple" (click)="replayGame()">MAIN LAGI</button>
-    <button class="btn-purple" (click)="goToMenu()">KEMBALI KE MENU</button>
+    <div class="fruit-row">
+      <span class="fruit">🍎</span>
+      <span class="fruit">🍍</span>
+      <span class="fruit">🍇</span>
+      <span class="fruit">🍓</span>
+      <span class="fruit">🍉</span>
+    </div>
+
+    <div class="victory-score">Skor Akhir: {{ finalScore }}</div>
+
+    <div class="victory-buttons">
+      <button class="btn-purple" (click)="replayGame()">MAIN LAGI</button>
+      <button class="btn-purple" (click)="goToMenu()">KEMBALI KE MENU</button>
+    </div>
+
+    <canvas id="confettiCanvas"></canvas>
+    <audio id="victorySound" src="assets/sounds/victory.mp3"></audio>
   </div>
-
-  <canvas id="confettiCanvas"></canvas>
-  <audio id="victorySound" src="assets/sounds/victory.mp3"></audio>
-</div>
 </ion-content>

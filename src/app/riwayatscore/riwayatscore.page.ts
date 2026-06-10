@@ -21,24 +21,26 @@ export class RiwayatscorePage implements OnInit {
     private audioService: AudioService
   ) {}
 
-ngOnInit() {
-  this.checkDailyReset();
-  this.dailyScores = JSON.parse(localStorage.getItem('dailyScores') || '[]');
-  this.totalWeeklyScore = this.dailyScores.reduce((sum, s) => sum + s.score, 0);
-}
+  ngOnInit() {
+    this.checkDailyReset();
+    this.dailyScores = this.getWeeklyScores();
+    this.totalWeeklyScore = this.dailyScores.reduce((sum, s) => sum + s.score, 0);
+  }
 
-ionViewDidEnter() {
-  this.checkDailyReset();
-  const currentLevel = localStorage.getItem('currentLevel')
-    ? parseInt(localStorage.getItem('currentLevel')!, 10)
-    : 1;
-  this.audioService.playLevelMusic(currentLevel);
+  ionViewDidEnter() {
+    this.checkDailyReset();
+    this.dailyScores = this.getWeeklyScores();
+    this.totalWeeklyScore = this.dailyScores.reduce((sum, s) => sum + s.score, 0);
 
-  this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(10, () => {
-    this.navCtrl.navigateRoot('/menu');
-  });
-}
+    const currentLevel = localStorage.getItem('currentLevel')
+      ? parseInt(localStorage.getItem('currentLevel')!, 10)
+      : 1;
+    this.audioService.playLevelMusic(currentLevel);
 
+    this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(10, () => {
+      this.navCtrl.navigateRoot('/menu');
+    });
+  }
 
   ionViewWillLeave() {
     if (this.backButtonSubscription) {
@@ -57,7 +59,6 @@ ionViewDidEnter() {
       return diff < 7;
     });
 
-    localStorage.setItem('dailyScores', JSON.stringify(scores));
     return scores;
   }
 
@@ -70,22 +71,13 @@ ionViewDidEnter() {
   }
 
   checkDailyReset() {
-  const now = new Date();
-  const resetHour = 0;  
-  const resetMinute = 15; 
+    const now = new Date();
+    const today = now.toDateString();
+    const lastReset = localStorage.getItem('lastResetDate');
 
-  const resetTime = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate(),
-    resetHour,
-    resetMinute,
-    0
-  );
-
-  if (now.getTime() >= resetTime.getTime()) {
-    localStorage.removeItem('dailyScores');
+    if (lastReset !== today && now.getHours() >= 0 && now.getMinutes() >= 15) {
+      localStorage.setItem('dailyScores', '[]');
+      localStorage.setItem('lastResetDate', today);
+    }
   }
-}
-
 }

@@ -69,61 +69,36 @@ export class GamePage implements OnInit {
     this.stopTimer();
   }
 
- initBoard() {
-  this.stopTimer();
+  initBoard() {
+    this.stopTimer();
+    this.time = this.getTimeForLevel(this.level);
+    localStorage.setItem('levelCompleted', 'false'); 
 
-  this.time = this.getTimeForLevel(this.level);
+    this.timer = setInterval(() => {
+      this.time--;
+      if (this.time <= 0) {
+        this.stopTimer();
+        this.saveDailyScore();
+        this.timeOverVisible = true;
+      }
+    }, 1000);
 
-  localStorage.setItem('levelCompleted', 'false'); 
-
-  this.timer = setInterval(() => {
-    this.time--;
-    if (this.time <= 0) {
-      this.stopTimer();
-      this.saveDailyScore();
-      this.timeOverVisible = true;
+    let size = 6;
+    let temp: any[] = [];
+    for (let i = 0; i < (size * size) / 2; i++) {
+      let icon = this.icons[i % this.icons.length];
+      temp.push({ icon, hidden: false }, { icon, hidden: false });
     }
-  }, 1000);
+    temp.sort(() => Math.random() - 0.5);
 
-  let size = 6;
-  let temp: any[] = [];
-  for (let i = 0; i < (size * size) / 2; i++) {
-    let icon = this.icons[i % this.icons.length];
-    temp.push({ icon, hidden: false }, { icon, hidden: false });
+    this.tiles = temp.map((t, i) => ({
+      ...t,
+      id: i,
+      x: (i % size) * 65,
+      y: Math.floor(i / size) * 65,
+      z: Math.floor(Math.random() * 10)
+    }));
   }
-  temp.sort(() => Math.random() - 0.5);
-
-  this.tiles = temp.map((t, i) => ({
-    ...t,
-    id: i,
-    x: (i % size) * 65,
-    y: Math.floor(i / size) * 65,
-    z: Math.floor(Math.random() * 10)
-  }));
-}
-
-
-
-retryLevel() {
-  this.timeOverVisible = false;
-  this.initBoard();
-}
-
-exitToMenu() {
-  this.timeOverVisible = false;
-  this.goToMenu();
-}
-
-
-
-getTimeForLevel(level: number): number {
-  if (level <= 29) return 60;   
-  if (level <= 45) return 40;   
-  if (level <= 50) return 30;  
-  return 60; 
-}
-
-
 
   stopTimer() {
     if (this.timer) {
@@ -141,6 +116,8 @@ getTimeForLevel(level: number): number {
         this.firstTile.hidden = true;
         tile.hidden = true;
         this.score += 10;
+        localStorage.setItem('currentScore', this.score.toString());
+
         this.lastMove = [this.firstTile, tile];
         this.checkWin();
       }
@@ -184,40 +161,36 @@ getTimeForLevel(level: number): number {
     }
   }
 
-  startNextLevel() {
-    this.level++;
-    localStorage.setItem('currentLevel', this.level.toString());
-    localStorage.setItem('currentScore', this.score.toString());
-    localStorage.setItem('levelCompleted', 'false');
-    this.levelTransitionVisible = false;
-    this.initBoard();
-    if (!this.audioService.isMusicPlaying()) {
-      this.audioService.playLevelMusic(this.level);
-    }
-  }
+ startNextLevel() {
+  this.level++;
+  localStorage.setItem('currentLevel', this.level.toString());
+  localStorage.setItem('currentScore', this.score.toString());
+  localStorage.setItem('levelCompleted', 'false');
+
+  this.saveDailyScore();
+
+  this.levelTransitionVisible = false;
+  this.initBoard();
+}
 
   resetGame() {
     this.saveDailyScore(); 
     this.level = 1;
     this.score = 0;
+    localStorage.setItem('currentScore', this.score.toString());
     localStorage.setItem('levelCompleted', 'false');
     this.stopTimer(); 
     this.initBoard();
-    if (!this.audioService.isMusicPlaying()) {
-      this.audioService.playLevelMusic(this.level);
-    }
   }
 
   replayGame() {
     this.finalResultVisible = false;
     this.level = 1;
     this.score = 0;
+    localStorage.setItem('currentScore', this.score.toString());
     localStorage.setItem('levelCompleted', 'false');
     this.stopTimer();
     this.initBoard();
-    if (!this.audioService.isMusicPlaying()) {
-      this.audioService.playLevelMusic(this.level);
-    }
   }
 
   goToMenu() {
@@ -228,10 +201,12 @@ getTimeForLevel(level: number): number {
   }
 
   onWin() {
-  this.audioService.stopMusic();
-  this.audioService.playLevelMusic(this.level);
-}
-
+    if (this.level >= 45 && this.level <= 49) {
+      this.audioService.playSuccessMusic();
+    } else if (this.level === 50) {
+      this.audioService.playVictoryMusic();
+    }
+  }
 
   useHint() {
     if (this.hint > 0) {
@@ -253,6 +228,7 @@ getTimeForLevel(level: number): number {
       this.lastMove[0].hidden = false;
       this.lastMove[1].hidden = false;
       this.score = Math.max(0, this.score - 10);
+      localStorage.setItem('currentScore', this.score.toString()); 
     }
   }
 
@@ -263,8 +239,7 @@ getTimeForLevel(level: number): number {
     const dayName = now.toLocaleDateString('id-ID', { weekday: 'long' });
 
     let scores = JSON.parse(localStorage.getItem('dailyScores') || '[]');
-    const icons = ["🍎","🍊","🍇","🍓","🍒","🍍","🍌","🍉","🥭","🥥","🍏","🥑","🥝","🍈","🌶️","🍐","🍅"];
-    const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+    const randomIcon = this.icons[Math.floor(Math.random() * this.icons.length)];
 
     scores.push({
       date: today,
@@ -275,6 +250,7 @@ getTimeForLevel(level: number): number {
       dateTime: now.toISOString()
     });
 
+    localStorage.setItem('currentScore', this.score.toString()); 
     localStorage.setItem('dailyScores', JSON.stringify(scores));
   }
 
@@ -283,11 +259,28 @@ getTimeForLevel(level: number): number {
     const today = new Date();
 
     scores = scores.filter((s: any) => {
-      const scoreDate = new Date(s.date);
+      const scoreDate = new Date(s.dateTime);
       const diff = (today.getTime() - scoreDate.getTime()) / (1000 * 3600 * 24);
       return diff < 7;
     });
 
     localStorage.setItem('dailyScores', JSON.stringify(scores));
+  }
+
+  getTimeForLevel(level: number): number {
+    if (level <= 29) return 60;   
+    if (level <= 45) return 40;   
+    if (level <= 50) return 30;  
+    return 60; 
+  }
+
+  retryLevel() {
+    this.timeOverVisible = false;
+    this.initBoard(); 
+  }
+
+  exitToMenu() {
+    this.timeOverVisible = false;
+    this.goToMenu(); 
   }
 }

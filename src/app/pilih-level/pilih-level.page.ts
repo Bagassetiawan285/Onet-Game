@@ -21,9 +21,9 @@ export class PilihLevelPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const currentLevel = localStorage.getItem('currentLevel');
-    this.maxLevelUnlocked = currentLevel ? parseInt(currentLevel, 10) : 1;
-
+    const allUnlocked = localStorage.getItem('allLevelsUnlocked') === 'true';
+    const currentLevel = parseInt(localStorage.getItem('currentLevel') || '1', 10);
+    this.maxLevelUnlocked = allUnlocked ? 50 : currentLevel;
     if (this.maxLevelUnlocked >= 50) {
       this.maxLevelUnlocked = 50;
     }
@@ -50,6 +50,7 @@ export class PilihLevelPage implements OnInit {
   selectLevel(lvl: number) {
     if (lvl <= this.maxLevelUnlocked) {
       localStorage.setItem('currentLevel', lvl.toString());
+      localStorage.setItem('levelCompleted', 'false');
       this.audioService.playLevelMusic(lvl);
       this.navCtrl.navigateForward('/game');
     }
