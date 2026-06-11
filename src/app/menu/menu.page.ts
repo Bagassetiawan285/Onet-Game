@@ -131,7 +131,4 @@ export class MenuPage implements OnInit {
     }
     this.navCtrl.navigateForward('/pilih-level');
   }
-
- 
-
 }

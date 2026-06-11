@@ -270,6 +270,22 @@ ion-content {
   100% { filter: drop-shadow(0 0 25px #ffeb3b); }
 }
 
+.tile.Putih {
+  background-color: #ffffff;
+  box-shadow: 0 0 15px #d5d5d6;
+}
+
+.tile.Biru {
+  background-color: #073882;
+  box-shadow: 0 0 15px #030362; 
+}
+
+.tile.Ungu {
+  background-color: #5a066b; 
+  box-shadow: 0 0 15px #aa00ff; 
+}
+
+
 .overlay-box {
   position: fixed;
   top: 50%; left: 50%;

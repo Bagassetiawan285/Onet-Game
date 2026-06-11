@@ -19,6 +19,10 @@ export class GamePage implements OnInit {
   tiles: any[] = [];
   firstTile: any = null;
   lastMove: any = null;
+  settings: any = {
+    theme: 'Putih'
+  };
+  
 
   icons = ["🍎","🍊","🍇","🍓","🍒","🍍","🍌","🍉","🥭","🥥","🍏","🥑","🥝","🍈","🌶️","🍐","🍅"];
 
@@ -36,16 +40,19 @@ export class GamePage implements OnInit {
     private routerOutlet: IonRouterOutlet 
   ) {}
 
-  ngOnInit() {
-    const savedLevel = localStorage.getItem('currentLevel');
-    const savedScore = localStorage.getItem('currentScore');
+ ngOnInit() {
+  const savedLevel = localStorage.getItem('currentLevel');
+  const savedScore = localStorage.getItem('currentScore');
+  const savedTheme = localStorage.getItem('tileTheme'); 
 
-    this.level = savedLevel ? parseInt(savedLevel, 10) : 1;
-    this.score = savedScore ? parseInt(savedScore, 10) : 0;
+  this.level = savedLevel ? parseInt(savedLevel, 10) : 1;
+  this.score = savedScore ? parseInt(savedScore, 10) : 0;
+  this.currentTheme = savedTheme || 'Putih'; 
 
-    this.checkWeeklyReset(); 
-    this.initBoard();
-  }
+  this.checkWeeklyReset(); 
+  this.initBoard();
+}
+
 
   ionViewDidEnter() {
     if (this.audioService.getMusicEnabled() && !this.audioService.isMusicPlaying()) {

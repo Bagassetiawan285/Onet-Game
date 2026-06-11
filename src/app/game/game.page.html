@@ -32,11 +32,9 @@
   <div id="board-container">
     <div id="board">
       <canvas id="lineCanvas"></canvas>
-      <div class="tile" *ngFor="let tile of tiles"
-           [style.left.px]="tile.x" [style.top.px]="tile.y"
-           [style.zIndex]="tile.z" [class.hidden]="tile.hidden"
-           [ngClass]="currentTheme"
-           (click)="audioService.playSfx('assets/sounds/click.mp3'); selectTile(tile)">
+      <div class="tile" *ngFor="let tile of tiles" [style.left.px]="tile.x" [style.top.px]="tile.y"
+        [style.zIndex]="tile.z" [class.hidden]="tile.hidden" [ngClass]="currentTheme"
+        (click)="audioService.playSfx('assets/sounds/click.mp3'); selectTile(tile)">
         {{ tile.icon }}
       </div>
     </div>
@@ -84,6 +82,12 @@
       <span class="fruit">🍓</span>
       <span class="fruit">🍉</span>
     </div>
+
+<div class="tile" [ngClass]="currentTheme">
+</div>
+
+
+
 
     <div class="victory-score">Skor Akhir: {{ finalScore }}</div>
 

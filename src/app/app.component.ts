@@ -3,6 +3,7 @@ import { Platform, NavController } from '@ionic/angular';
 import { App } from '@capacitor/app';
 import { Router } from '@angular/router';
 import { AudioService } from './audio.service'; 
+import { LocalNotifications } from '@capacitor/local-notifications'; 
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,9 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(async () => {
+      await LocalNotifications.requestPermissions();
+
       this.platform.backButton.subscribeWithPriority(10, () => {
         const currentUrl = this.router.url;
 

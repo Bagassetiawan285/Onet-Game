@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
 import { AudioService } from '../audio.service'; 
 import { Subscription } from 'rxjs';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 @Component({
   selector: 'app-setting',
@@ -12,9 +13,10 @@ import { Subscription } from 'rxjs';
 export class SettingPage implements OnInit {
 
   settings = {
-    theme: 'Klasik',
+    theme: 'Putih',       
     music: true,
-    sfx: true
+    sfx: true,
+    notifications: true 
   };
 
   backButtonSubscription: Subscription | null = null;
@@ -25,8 +27,9 @@ export class SettingPage implements OnInit {
     private platform: Platform
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loadSettings();
+    await LocalNotifications.requestPermissions();
   }
 
   loadSettings() {
@@ -41,6 +44,12 @@ export class SettingPage implements OnInit {
 
     this.audioService.setMusicEnabled(this.settings.music);
     this.audioService.setSfxEnabled(this.settings.sfx);
+
+    if (this.settings.notifications) {
+      this.scheduleWeeklyNotifications();
+    }
+
+    localStorage.setItem('tileTheme', this.settings.theme);
   }
 
   updateSettings() {
@@ -52,6 +61,14 @@ export class SettingPage implements OnInit {
     if (!this.audioService.getMusicEnabled()) {
       this.audioService.stopMusic();
     }
+
+    if (this.settings.notifications) {
+      this.scheduleWeeklyNotifications();
+    } else {
+      this.cancelNotifications();
+    }
+
+    localStorage.setItem('tileTheme', this.settings.theme);
   }
 
   saveAndExit() {
@@ -64,7 +81,7 @@ export class SettingPage implements OnInit {
   }
 
   changeTheme() {
-    const themes = ['Klasik', 'Modern', 'Neon'];
+    const themes = ['Putih', 'Biru', 'Ungu'];
     const currentIndex = themes.indexOf(this.settings.theme);
     const nextIndex = (currentIndex + 1) % themes.length;
     this.settings.theme = themes[nextIndex];
@@ -82,5 +99,34 @@ export class SettingPage implements OnInit {
       this.backButtonSubscription.unsubscribe();
       this.backButtonSubscription = null;
     }
+  }
+
+  async scheduleWeeklyNotifications() {
+    await LocalNotifications.schedule({
+      notifications: [
+        {
+          id: 1,
+          title: "Main lagi yuk!",
+          body: "Jangan lupa main game 🚀",
+          schedule: { every: 'week', on: { weekday: 1, hour: 10, minute: 0 } } 
+        },
+        {
+          id: 2,
+          title: "Waktunya tantangan!",
+          body: "Level baru menunggu 🎮",
+          schedule: { every: 'week', on: { weekday: 4, hour: 10, minute: 0 } } 
+        },
+        {
+          id: 3,
+          title: "Sunday Fun!",
+          body: "Mainkan game favoritmu 🌟",
+          schedule: { every: 'week', on: { weekday: 7, hour: 10, minute: 0 } } 
+        }
+      ]
+    });
+  }
+
+  async cancelNotifications() {
+    await LocalNotifications.cancel({ notifications: [{ id: 1 }, { id: 2 }, { id: 3 }] });
   }
 }
