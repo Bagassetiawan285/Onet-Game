@@ -44,7 +44,7 @@ export class GamePage implements OnInit {
   const savedLevel = localStorage.getItem('currentLevel');
   const savedScore = localStorage.getItem('currentScore');
   const savedTheme = localStorage.getItem('tileTheme'); 
-
+  
   this.level = savedLevel ? parseInt(savedLevel, 10) : 1;
   this.score = savedScore ? parseInt(savedScore, 10) : 0;
   this.currentTheme = savedTheme || 'Putih'; 
@@ -52,7 +52,6 @@ export class GamePage implements OnInit {
   this.checkWeeklyReset(); 
   this.initBoard();
 }
-
 
   ionViewDidEnter() {
     if (this.audioService.getMusicEnabled() && !this.audioService.isMusicPlaying()) {
@@ -180,15 +179,25 @@ export class GamePage implements OnInit {
   this.initBoard();
 }
 
-  resetGame() {
-    this.saveDailyScore(); 
-    this.level = 1;
-    this.score = 0;
-    localStorage.setItem('currentScore', this.score.toString());
-    localStorage.setItem('levelCompleted', 'false');
-    this.stopTimer(); 
-    this.initBoard();
-  }
+resetGame() {
+  localStorage.removeItem('currentLevel');
+  localStorage.removeItem('currentScore');
+  localStorage.removeItem('levelCompleted');
+  localStorage.removeItem('dailyScores');
+  localStorage.removeItem('allLevelsUnlocked');
+
+  this.level = 1;
+  this.score = 0;
+  localStorage.setItem('currentScore', this.score.toString());
+  localStorage.setItem('levelCompleted', 'false');
+
+  this.stopTimer();
+  this.initBoard();
+
+  console.log("⚡ Progres dihapus, user baru dibuat.");
+  this.navCtrl.navigateRoot('/menu');
+}
+
 
   replayGame() {
     this.finalResultVisible = false;
@@ -199,6 +208,9 @@ export class GamePage implements OnInit {
     this.stopTimer();
     this.initBoard();
   }
+
+
+
 
   goToMenu() {
     this.finalResultVisible = false;

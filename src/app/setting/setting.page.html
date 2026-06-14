@@ -26,6 +26,13 @@
           <ion-toggle slot="end" [(ngModel)]="settings.notifications" (ionChange)="updateSettings()"></ion-toggle>
         </ion-item>
 
+        <ion-item>
+          <ion-label color="danger">Hapus Progres (User Baru)</ion-label>
+          <ion-button expand="block" color="danger" (click)="resetGame()">
+            <ion-icon name="trash-outline"></ion-icon>
+            HAPUS PROGRES
+          </ion-button>
+        </ion-item>
 
         <div class="divider-space"></div>
 
@@ -34,7 +41,6 @@
           <ion-label>Ganti Tema Tile</ion-label>
           <ion-note slot="end" color="dark">{{ settings.theme }}</ion-note>
         </ion-item>
-
       </ion-list>
     </div>
 
@@ -46,8 +52,10 @@
         KEMBALI
       </ion-button>
     </div>
+
     <div class="privacy-link">
       <a href="https://sites.google.com/view/onetgame" target="_blank">Kebijakan Privasi</a>
     </div>
   </div>
+
 </ion-content>

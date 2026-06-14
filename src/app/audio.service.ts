@@ -49,14 +49,18 @@ export class AudioService {
     }
   }
 
-  playSuccessMusic(path: string = 'assets/sounds/success.mp3', loop: boolean = false) {
-    if (this.musicEnabled) {
-      this.stopMusic();
-      this.currentMusic = new Audio(path);
-      this.currentMusic.loop = loop;
-      this.currentMusic.play().catch(err => console.log('Success music blocked:', err));
-    }
+ playSuccessMusic(path: string = 'assets/sounds/success.mp3', loop: boolean = false) {
+  console.log('▶️ playSuccessMusic dipanggil dengan path:', path);
+  if (this.musicEnabled) {
+    this.stopMusic();
+    this.currentMusic = new Audio(path);
+    this.currentMusic.loop = loop;
+    this.currentMusic.play()
+      .then(() => console.log('✅ Success music started'))
+      .catch(err => console.error('❌ Error play success music:', err));
   }
+}
+
 
   playVictoryMusic(path: string = 'assets/sounds/victory.mp3', loop: boolean = false) {
     if (this.musicEnabled) {

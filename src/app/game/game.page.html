@@ -1,46 +1,40 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="light">
-    <ion-title>
-      <ion-button class="btn setting" routerLink="/setting">
-        <ion-icon name="settings"></ion-icon> SETTINGS
-      </ion-button>
-    </ion-title>
+    <ion-title>Game Onet</ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="goToMenu()">
         <ion-icon name="arrow-back-outline"></ion-icon>
         Kembali
       </ion-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="btn setting" routerLink="/setting">
+        <ion-icon name="settings"></ion-icon> SETTINGS
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Info Game -->
   <div id="game-info">
-    <div class="info-box level">
-      <ion-label>Level: {{ level }}</ion-label>
-    </div>
-    <div class="info-box score">
-      <ion-label>Score: {{ score }}</ion-label>
-    </div>
-    <div class="info-box time">
-      <ion-label>Waktu: {{ time }} detik</ion-label>
-    </div>
+    <div class="info-box level"><ion-label>Level: {{ level }}</ion-label></div>
+    <div class="info-box score"><ion-label>Score: {{ score }}</ion-label></div>
+    <div class="info-box time"><ion-label>Waktu: {{ time }} detik</ion-label></div>
   </div>
 
-  <!-- Board -->
   <div id="board-container">
     <div id="board">
       <canvas id="lineCanvas"></canvas>
-      <div class="tile" *ngFor="let tile of tiles" [style.left.px]="tile.x" [style.top.px]="tile.y"
-        [style.zIndex]="tile.z" [class.hidden]="tile.hidden" [ngClass]="currentTheme"
-        (click)="audioService.playSfx('assets/sounds/click.mp3'); selectTile(tile)">
+      <div class="tile" *ngFor="let tile of tiles"
+           [style.left.px]="tile.x" [style.top.px]="tile.y"
+           [style.zIndex]="tile.z" [class.hidden]="tile.hidden"
+           [ngClass]="currentTheme"
+           (click)="audioService.playSfx('assets/sounds/click.mp3'); selectTile(tile)">
         {{ tile.icon }}
       </div>
     </div>
   </div>
 
-  <!-- Controls -->
   <div id="controls">
     <button (click)="audioService.playSfx('assets/sounds/click.mp3'); resetGame()">RESET</button>
     <button (click)="audioService.playSfx('assets/sounds/click.mp3'); useHint()">HINT ({{ hint }})</button>
@@ -48,7 +42,6 @@
     <button (click)="audioService.playSfx('assets/sounds/click.mp3'); undoMove()">UNDO ({{ undo }})</button>
   </div>
 
-  <!-- Overlay Waktu Habis -->
   <div *ngIf="timeOverVisible" class="overlay-box">
     <h2 class="overlay-title">Waktu Habis ⏰</h2>
     <p>Mau coba lagi?</p>
@@ -82,12 +75,6 @@
       <span class="fruit">🍓</span>
       <span class="fruit">🍉</span>
     </div>
-
-<div class="tile" [ngClass]="currentTheme">
-</div>
-
-
-
 
     <div class="victory-score">Skor Akhir: {{ finalScore }}</div>
 

@@ -62,19 +62,7 @@ export class PilihanPage implements OnInit {
     this.levelTransitionVisible = false;
   }
 
-  async resetProgress() {
-    localStorage.removeItem('currentLevel');
-    localStorage.removeItem('currentScore');
-    localStorage.removeItem('levelCompleted');
-    localStorage.removeItem('allLevelsUnlocked');
-    localStorage.removeItem('dailyScores');
+  
 
-    const toast = await this.toastController.create({
-      message: '✅ Progress berhasil direset, kamu dianggap user baru!',
-      duration: 2000,
-      color: 'success',
-      position: 'middle'
-    });
-    toast.present();
-  }
+  
 }
